@@ -1,0 +1,688 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins', sans-serif;
+}
+
+body{
+  background:#f4f9fc;
+  color:#1e293b;
+  min-height:100vh;
+}
+
+/* ================= APP LAYOUT + SIDEBAR ================= */
+
+.app-layout{
+  display:flex;
+  min-height:100vh;
+}
+
+.sidebar{
+  width:260px;
+  flex-shrink:0;
+  background:linear-gradient(180deg, #0c4a6e 0%, #0369a1 100%);
+  color:#f8fafc;
+  display:flex;
+  flex-direction:column;
+  padding:24px 16px;
+  position:sticky;
+  top:0;
+  height:100vh;
+  box-shadow:4px 0 20px rgba(0,0,0,0.12);
+  z-index:100;
+}
+
+.sidebar-brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:22px;
+  font-weight:700;
+  margin-bottom:32px;
+  padding:0 8px;
+}
+
+.sidebar-brand i{
+  font-size:26px;
+  color:#7dd3fc;
+}
+
+.sidebar-nav{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  flex:1;
+}
+
+.sidebar-btn{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:4px;
+  width:100%;
+  padding:14px 16px;
+  border:none;
+  border-radius:12px;
+  background:transparent;
+  color:#e0f2fe;
+  font-size:15px;
+  font-weight:500;
+  cursor:pointer;
+  text-align:left;
+  transition:background 0.2s, transform 0.15s;
+}
+
+.sidebar-btn i{
+  font-size:18px;
+  margin-bottom:2px;
+}
+
+.sidebar-btn:hover{
+  background:rgba(255,255,255,0.12);
+}
+
+.sidebar-btn.active{
+  background:#f8fafc;
+  color:#0369a1;
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);
+}
+
+.sidebar-btn.active i{
+  color:#0284c7;
+}
+
+.sidebar-badge{
+  font-size:11px;
+  font-weight:600;
+  background:rgba(125,211,252,0.25);
+  color:#bae6fd;
+  padding:2px 8px;
+  border-radius:10px;
+  margin-top:2px;
+}
+
+.sidebar-btn.active .sidebar-badge{
+  background:#e0f2fe;
+  color:#0369a1;
+}
+
+.sidebar-footnote{
+  font-size:11px;
+  color:#94a3b8;
+  padding:16px 8px 0;
+  border-top:1px solid rgba(255,255,255,0.15);
+  margin-top:16px;
+}
+
+.app-content{
+  flex:1;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+}
+
+.sidebar-toggle{
+  display:none;
+  background:transparent;
+  border:none;
+  font-size:22px;
+  cursor:pointer;
+  color:#0f172a;
+  padding:8px;
+}
+
+.view-panel{
+  display:none;
+}
+
+.view-panel.active{
+  display:block;
+}
+
+.page-desc{
+  max-width:720px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.loading-msg{
+  text-align:center;
+  padding:40px;
+  color:#64748b;
+  font-size:16px;
+}
+
+.metrics-row{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+  gap:16px;
+  margin-bottom:28px;
+}
+
+.metric-box{
+  background:white;
+  border-radius:14px;
+  padding:20px;
+  text-align:center;
+  box-shadow:0 4px 14px rgba(0,0,0,0.06);
+}
+
+.metric-box .metric-value{
+  font-size:28px;
+  font-weight:700;
+  color:#0284c7;
+}
+
+.metric-box .metric-label{
+  font-size:13px;
+  color:#64748b;
+  margin-top:6px;
+}
+
+.charts-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+  margin:28px 0;
+}
+
+.chart-card{
+  background:white;
+  border-radius:16px;
+  padding:20px;
+  box-shadow:0 4px 14px rgba(0,0,0,0.06);
+}
+
+.chart-heading{
+  font-size:16px;
+  font-weight:600;
+  margin-bottom:16px;
+  color:#0f172a;
+}
+
+.analysis-card{
+  background:white;
+  border-radius:16px;
+  padding:24px;
+  box-shadow:0 4px 14px rgba(0,0,0,0.06);
+  font-size:14px;
+  line-height:1.8;
+  color:#475569;
+}
+
+.analysis-card h3{
+  color:#0284c7;
+  margin-bottom:12px;
+  font-size:18px;
+}
+
+.analysis-card strong{
+  color:#0f172a;
+}
+
+.mapping-table{
+  margin-top:24px;
+}
+
+/* ================= HEADER ================= */
+
+.header{
+  width:100%;
+  height:70px;
+  background:#9ad9ff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 32px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.08);
+  flex-shrink:0;
+}
+
+.header-left{
+  display:flex;
+  align-items:center;
+  gap:25px;
+}
+
+.header-icon{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:18px;
+  color:#0f172a;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.header-icon:hover{
+  transform:scale(1.08);
+}
+
+.logo{
+  font-size:34px;
+  font-weight:700;
+  color:#0f172a;
+}
+
+/* ================= MAIN ================= */
+
+.container{
+  width:90%;
+  max-width:1100px;
+  margin:auto;
+  padding:50px 0;
+}
+
+.title{
+  text-align:center;
+  font-size:36px;
+  margin-bottom:10px;
+  color:#0f172a;
+}
+
+.subtitle{
+  text-align:center;
+  font-size:14px;
+  color:#64748b;
+  margin-bottom:30px;
+}
+
+.subtitle code{
+  background:#e2e8f0;
+  padding:2px 6px;
+  border-radius:4px;
+  font-size:13px;
+}
+
+.score-badge{
+  font-size:0.8em;
+  color:#555;
+  background:#e2e8f0;
+  padding:2px 6px;
+  border-radius:10px;
+  font-weight:normal;
+  margin-left:5px;
+}
+
+.error-msg{
+  color:#dc2626;
+}
+
+.section-title{
+  font-size:22px;
+  margin:30px 0 15px;
+  color:#0f172a;
+}
+
+.stats-grid,
+.mapping-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+  gap:16px;
+  margin-bottom:24px;
+}
+
+.stat-card{
+  background:white;
+  border-radius:12px;
+  padding:16px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.06);
+  flex: 0 0 auto;
+  min-width: 160px;
+  max-width: 200px;
+}
+
+.stat-card h3{
+  font-size:16px;
+  margin-bottom:10px;
+  color:#0284c7;
+}
+
+.stat-card ul{
+  list-style:none;
+  font-size:14px;
+  color:#475569;
+  line-height:1.7;
+}
+
+.results-charts{
+  margin-bottom:24px;
+}
+
+/* SEARCH */
+
+.search-container{
+  position:relative;
+  width:100%;
+  margin-bottom:20px;
+}
+
+.search-box{
+  width:100%;
+  padding:18px 20px;
+  border:none;
+  border-radius:18px;
+  font-size:17px;
+  box-shadow:0 4px 15px rgba(0,0,0,0.08);
+  outline:none;
+}
+
+.suggestions{
+  margin-top:12px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.suggestion{
+  background:white;
+  padding:10px 16px;
+  border-radius:25px;
+  cursor:pointer;
+  border:2px solid #9ad9ff;
+  transition:0.25s;
+}
+
+.suggestion:hover{
+  background:#9ad9ff;
+}
+
+/* SELECTED SYMPTOMS */
+
+.selected-title{
+  margin-top:30px;
+  margin-bottom:15px;
+  font-size:20px;
+  font-weight:600;
+}
+
+.selected-symptoms{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.symptom-tag{
+  background:#38bdf8;
+  color:white;
+  padding:10px 16px;
+  border-radius:25px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:15px;
+  animation:fadeIn 0.3s ease;
+}
+
+.remove-btn{
+  cursor:pointer;
+  font-weight:bold;
+  transition:0.2s;
+}
+
+.remove-btn:hover{
+  color:#dbeafe;
+}
+
+/* SEARCH MODE */
+
+.mode-section{
+  margin-top:35px;
+}
+
+.mode-title{
+  font-size:20px;
+  font-weight:600;
+  margin-bottom:15px;
+}
+
+.radio-group{
+  display:flex;
+  gap:30px;
+  font-size:18px;
+}
+
+/* BUTTON */
+
+.search-button{
+  margin-top:40px;
+  width:100%;
+  padding:18px;
+  border:none;
+  border-radius:18px;
+  background:#0ea5e9;
+  color:white;
+  font-size:20px;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+  box-shadow:0 4px 15px rgba(14,165,233,0.3);
+}
+
+.search-button:hover{
+  background:#0284c7;
+  transform:translateY(-2px);
+}
+
+/* RESULTS */
+
+.results{
+  margin-top:50px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
+}
+
+.card{
+  background:white;
+  border-radius:20px;
+  padding:25px;
+  box-shadow:0 5px 18px rgba(0,0,0,0.08);
+}
+
+.card-title{
+  font-size:24px;
+  font-weight:700;
+  margin-bottom:20px;
+  color:#0284c7;
+}
+
+.result-item{
+  padding:15px;
+  border-radius:14px;
+  background:#f8fafc;
+  margin-bottom:15px;
+}
+
+.result-item h4{
+  margin-bottom:8px;
+}
+
+.source{
+  margin-top:10px;
+  font-size:14px;
+  color:#64748b;
+}
+
+/* TABLE RESULTS */
+
+.table-container{
+  margin-top:50px;
+  background:white;
+  border-radius:20px;
+  padding:25px;
+  box-shadow:0 5px 18px rgba(0,0,0,0.08);
+  overflow-x:auto;
+}
+
+.results-table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+.results-table thead{
+  background:#9ad9ff;
+}
+
+.results-table th{
+  padding:15px;
+  text-align:left;
+  font-weight:600;
+  color:#0f172a;
+  border-bottom:2px solid #0ea5e9;
+}
+
+.results-table td{
+  padding:15px;
+  border-bottom:1px solid #e2e8f0;
+}
+
+.results-table tbody tr:hover{
+  background:#f8fafc;
+}
+
+.pagination-controls{
+  margin-top:15px;
+  text-align:center;
+}
+
+.pagination-controls .show-more-btn{
+  background:#e0f2fe;
+  border:1px solid #7dd3fc;
+  border-radius:8px;
+  padding:10px 16px;
+  cursor:pointer;
+  color:#0284c7;
+  font-weight:600;
+  transition:0.2s;
+}
+
+.pagination-controls .show-more-btn:hover{
+  background:#bae6fd;
+}
+
+.disease-name{
+  font-weight:600;
+  color:#0284c7;
+}
+
+.symptoms-list{
+  font-size:14px;
+  color:#64748b;
+}
+
+.drugs-list{
+  font-size:14px;
+  color:#16a34a;
+  font-weight:500;
+}
+
+/* ANIMATION */
+
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform:translateY(10px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+  .sidebar{
+    position:fixed;
+    left:0;
+    transform:translateX(-100%);
+    transition:transform 0.3s ease;
+  }
+
+  .sidebar.open{
+    transform:translateX(0);
+  }
+
+  .sidebar-toggle{
+    display:block;
+  }
+
+  .charts-row{
+    grid-template-columns:1fr;
+  }
+
+  .results{
+    grid-template-columns:1fr;
+  }
+
+  .header{
+    padding:0 20px;
+  }
+
+  .logo{
+    font-size:26px;
+  }
+
+  .header-left{
+    gap:15px;
+  }
+
+  .table-container{
+    overflow-x:auto;
+  }
+
+  .results-table{
+    font-size:14px;
+  }
+
+  .results-table th,
+  .results-table td{
+    padding:10px;
+  }
+}
+
+/* ================= NOUVEAUX STYLES POUR LES STATISTIQUES ================= */
+
+.stats-container {
+  display: block; /* S'assure que le conteneur force le retour à la ligne */
+  width: 100%;
+}
+
+.stats-main-title {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #334155;
+  width: 100%;
+}
+
+.stats-main-title.mt-30 {
+  margin-top: 30px;
+}
+
+.stats-subtitle {
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+/* Conteneur des cartes alignées horizontalement */
+.cards-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap; /* Permet de passer à la ligne sur mobile */
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+/* On s'assure que la carte s'adapte bien */
+.stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  flex: 1 1 200px; /* Les cartes prennent la place dispo, minimum 200px */
+  min-width: 200px;
+}

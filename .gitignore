@@ -1,0 +1,42 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+
+# Local environment files
+.env
+
+# Raw biomedical data
+sources/DRUGBANK/
+sources/HPO/
+sources/OMIM/
+sources/SIDER/
+sources/STITCH - ATC/
+
+# Generated outputs
+omim_diseases.json
+*.generated.json
+
+# Large compressed files
+*.gz
+*.zip
+*.tar
+*.tar.gz
+
+# SQLite databases
+*.sqlite
+*.db
+.git_ancien_historique/
+
+sources/OMIM/omim.txt
+sources/DRUGBANK/drugbank.xml
+.git_ancien_historique/
+
+.git_historique_temporaire/

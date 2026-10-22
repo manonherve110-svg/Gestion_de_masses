@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Data Source Statistics — AlloDoctor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2d9d5a64f.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .sources-section {
+      margin: 30px 0;
+    }
+    
+    .sources-title {
+      font-size: 22px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .sources-title i {
+      color: #4CAF50;
+    }
+
+    .charts-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .chart-box {
+      margin-bottom: 20px;
+    }
+
+    .chart-box h4 {
+      margin: 0 0 15px 0;
+      color: #333;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .chart-canvas {
+      position: relative;
+      height: 300px;
+      width: 100%;
+      max-width: 450px;
+      margin: 0 auto;
+    }
+
+    /* Le nouveau style des cartes SANS la ligne verte */
+    .stat-card {
+      padding: 10px 15px;
+      margin-bottom: 15px;
+    }
+
+    .stat-card h3 {
+      margin: 0 0 10px 0;
+      color: #333;
+      font-size: 16px;
+      border-bottom: 1px solid #ddd; /* Petite ligne grise en dessous du titre pour structurer */
+      padding-bottom: 5px;
+    }
+
+    .stat-card ul {
+      margin: 0;
+      padding-left: 20px;
+      list-style: disc;
+    }
+
+    .stat-card li {
+      margin: 5px 0;
+      color: #555;
+      font-size: 14px;
+    }
+
+    .cards-row {
+      display: grid;
+      /* On force 5 colonnes de même taille sur une seule ligne */
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px;
+    }
+
+    @media (max-width: 1024px) {
+      .cards-row {
+        overflow-x: auto;
+        padding-bottom: 10px; /* Espace pour la barre de défilement */
+        /* On donne une largeur minimum pour que le texte reste lisible */
+        grid-template-columns: repeat(5, minmax(200px, 1fr)); 
+      }
+    }
+
+    @media (max-width: 768px) {
+      .charts-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="app-layout">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <i class="fas fa-stethoscope"></i>
+      <span>AlloDoctor</span>
+    </div>
+    <nav class="sidebar-nav" aria-label="Main navigation">
+      <a href="index.html" class="sidebar-btn">
+        <i class="fas fa-search"></i>
+        <span>Symptom Search</span>
+      </a>
+      <button type="button" class="sidebar-btn active">
+        <i class="fas fa-database"></i>
+        <span>Data Source Statistics</span>
+      </button>
+    </nav>
+    <p class="sidebar-footnote">Projet GMD 2026</p>
+  </aside>
+
+  <div class="app-content">
+    <header class="header">
+      <div class="header-left">
+        <button type="button" class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+      <div class="logo">AlloDoctor</div>
+    </header>
+
+    <main class="container">
+      <h1 class="title">Data Source Statistics & Analysis</h1>
+      <p style="text-align: center; color: #666; margin-bottom: 20px;">Comparative analysis of AlloDoctor's biomedical data sources</p>
+      
+      <div id="sourcesLoading" class="loading-msg">Loading statistics...</div>
+      <div id="sourcesContent" hidden>
+        
+        <!-- Section: Les 2 graphiques -->
+        <div class="sources-section">
+          <div class="sources-title">
+            <i class="fas fa-pie-chart"></i>
+            Database & Entity Distribution
+          </div>
+          
+          <div class="charts-container">
+            <div class="chart-box">
+              <h4 style="text-align: center;">Database Usage Distribution</h4>
+              <div class="chart-canvas">
+                <canvas id="distributionChart"></canvas>
+              </div>
+            </div>
+
+            <div class="chart-box">
+              <h4 style="text-align: center;">Medical Entities (Symptoms, Diseases, Drugs)</h4>
+              <div class="chart-canvas">
+                <canvas id="entityChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section: Les cartes de données en dessous -->
+        <div class="sources-section">
+          <div class="sources-title">
+            <i class="fas fa-info-circle"></i>
+            Global Statistics Details
+          </div>
+          <div class="stats-grid" id="statsGrid"></div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="sources.js"></script>
+</body>
+</html>

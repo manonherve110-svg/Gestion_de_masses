@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AlloDoctor — Symptom, Disease and Medication Search</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2d9d5a64f.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="app-layout">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <i class="fas fa-stethoscope"></i>
+      <span>AlloDoctor</span>
+    </div>
+    <nav class="sidebar-nav" aria-label="Main navigation">
+      <button type="button" class="sidebar-btn active" data-view="search">
+        <i class="fas fa-search"></i>
+        <span>Symptom Search</span>
+      </button>
+      <a href="sources.html" class="sidebar-btn">
+        <i class="fas fa-database"></i>
+        <span>Data Source Statistics</span>
+      </a>
+    </nav>
+    <p class="sidebar-footnote">Projet GMD 2026 </p>
+  </aside>
+
+  <div class="app-content">
+    <header class="header">
+      <div class="header-left">
+        <button type="button" class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+      <div class="logo">AlloDoctor</div>
+    </header>
+
+    <main class="container view-panel active" id="view-search">
+      <h1 class="title">Symptom Search</h1>
+
+      <div class="search-container">
+        <input type="text" class="search-box" id="searchInput"
+          placeholder="Symptom or synonym (e.g. fever, migr*)..." />
+        <div class="suggestions" id="suggestions"></div>
+      </div>
+
+      <h2 class="selected-title">Selected Symptoms</h2>
+      <div class="selected-symptoms" id="selectedSymptoms"></div>
+
+      <div class="mode-section">
+        <div class="mode-title">Search Mode</div>
+        <div class="radio-group">
+          <label><input type="radio" name="mode" value="AND" checked /> AND (all symptoms)</label>
+          <label><input type="radio" name="mode" value="OR" /> OR (at least one symptom)</label>
+        </div>
+      </div>
+
+      <button class="search-button" type="button">Search Diseases &amp; Medications</button>
+
+      <div class="results">
+        <div class="card">
+          <div class="card-title">Diseases That May Cause These Symptoms</div>
+          <div id="maladies-results"></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Medications That May Cause These Symptoms</div>
+          <div id="medicaments-results"></div>
+        </div>
+      </div>
+
+      <!-- Tableau des traitements -->
+      <div class="table-container">
+        <h2 class="card-title">Medications for Treatment</h2>
+        <table class="results-table">
+          <thead>
+            <tr>
+              <!-- <th>Disease</th> A ÉTÉ SUPPRIMÉ ICI -->
+              <th>Symptoms Searched</th>
+              <th>Medication</th>
+              <th>Source</th>
+            </tr>
+          </thead>
+          <tbody id="diseasesTableBody"></tbody>
+        </table>
+        <div id="treatmentsPagination" class="pagination-controls"></div>
+      </div>
+
+      <!-- Results Overview tout en bas -->
+      <div class="results-charts card" id="resultsChartsSection" style="display:none; margin-top: 20px;">
+        <div class="card-title">Results Overview</div>
+        <canvas id="resultsChart" height="120"></canvas>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
